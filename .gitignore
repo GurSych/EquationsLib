@@ -1,0 +1,11 @@
+### VS Code ###
+.vscode/
+
+### Py cache ###
+g_equations/__pycache__/
+
+### Test .py ###
+*.py
+
+### Test .exe ###
+*.exe
