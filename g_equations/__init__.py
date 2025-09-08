@@ -21,14 +21,14 @@ def equ_to_dict(equation_str: str) -> dict:
             var_sign  = 1.
             var_value = var_str[:-1]
         else:
-            raise ValueError("g_equations: Variable {} must have a sign!".format(var_name))
+            raise ValueError("g_equations: Variable {} must have a sign".format(var_name))
         if len(var_value) == 0: 
             var_value = 1.0
         else:
             try:
                 var_value = float(var_value)
             except ValueError:
-                raise ValueError("g_equations: Variable {} has incorect coefficient!".format(var_name))
+                raise ValueError("g_equations: Variable {} has incorect coefficient".format(var_name))
         if var_name in equation_dict:
             equation_dict[var_name] += var_value * var_sign
         else:
