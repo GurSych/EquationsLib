@@ -17,7 +17,7 @@ import g_equations.np_handler
 
 ## Linear equation to dictionary
 
-g_equations module has equ_to_dict(_equation_) function gets an `str` object with human-like written liner equation and returnes a dictionary with variablies' coefficients
+g_equations module has equ_to_dict(_equation_) function that gets an `str` object with human-like written liner equation and returnes a dictionary with variablies' coefficients
 
 ```py
 equ_dict = g_equations.equ_to_dict("x + 72.3y - 3z = 8.0")
