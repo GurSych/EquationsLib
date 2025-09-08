@@ -3,13 +3,13 @@ import g_equations
 
 def numpy_from_dicts(equations_dicts: list) -> dict:
     matrix_pair = matrixs_from_dicts(equations_dicts)
-    vars = sorted(equations_dicts[0].keys())
+    vars        = sorted(equations_dicts[0].keys())
     vars.remove("res")
-    A_matrix = numpy.matrix(matrix_pair[0])
-    B_matrix = numpy.matrix(matrix_pair[1])
-    A1_matrix = numpy.linalg.inv(A_matrix)
-    ans_matrix = A1_matrix * B_matrix
-    var_dict = dict()
+    A_matrix    = numpy.matrix(matrix_pair[0])
+    B_matrix    = numpy.matrix(matrix_pair[1])
+    A1_matrix   = numpy.linalg.inv(A_matrix)
+    ans_matrix  = A1_matrix * B_matrix
+    var_dict    = dict()
     for i in range(len(vars)):
         var_dict[vars[i]] = float(ans_matrix[i,0])
     return var_dict
