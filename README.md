@@ -45,7 +45,8 @@ g_equations.np_handler has matrixs_from_dicts(_dictionaries_) function that gets
 Let's take a look at this system of equations:<br>
 $3x - y + 2z = -4;$<br>
 $x + 4y - z = 10;$<br>
-$2x + 3y + z = 8;$<br><br>
+$2x + 3y + z = 8;$<br>
+<br>
 Matrix can be got via matrixs_from_dicts(_dictionaries_) like this:
 
 ```py
@@ -76,6 +77,13 @@ matrix_pair[0]: [ [3.0,-1.0, 2.0],        matrix_pair[1]: [ [-4.0],
 ## Solve system of linear equations
 
 g_equations.np_handler has numpy_from_dicts(_dictionaries_) function that gets a list of dictionaties (like in [&#39;the section upper&#39;](#linear-equation-to-dictionary)) with variablies' coefficients from a system of equations and returnes dictionary with system's roots: roots' coefficients by names of their variables
+
+Let's take a look at this system of equations:<br>
+$3x - y + 2z = -4;$<br>
+$x + 4y - z = 10;$<br>
+$2x + 3y + z = 8;$<br>
+<br>
+Roots can be got via numpy_from_dicts(_dictionaries_) like this:
 
 ```py
 equ1 = {'res': -4.0, 'x': 3.0, 'y': -1.0, 'z': 2.0}
