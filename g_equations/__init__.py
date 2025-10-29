@@ -43,8 +43,25 @@ def equ_to_dict(equation_str: str) -> dict:
                 equation_dict[var_name] = var_value * local_k
             if char == '=': break 
             var_indx = i
-            
+
     go_coefficients(1.)
     equation_str = equ_pair[1] + '='
     go_coefficients(-1.)
     return equation_dict
+
+def dict_to_str(equation_dict: dict) -> str:
+    out_str = ""
+    for key in equation_dict.keys():
+        if key == "res": continue
+        var_name  = key
+        var_value = equation_dict[key]
+        if var_value == 0: continue
+        out_str += " + " if var_value > 0 else " - "
+        if abs(var_value) != 1.0: out_str += str(abs(var_value))
+        out_str += var_name
+    out_str += " = "
+    try:
+        out_str += str(equation_dict["res"])
+    except KeyError:
+        raise Exception("g_equations: dictionary must have value by 'res' key")
+    return out_str[3:]
