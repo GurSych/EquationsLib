@@ -30,6 +30,9 @@ def matrixs_from_dicts(equations_dicts: list) -> list:
 def numpy_from_equs(equations_strs: list) -> dict:
     return numpy_from_dicts(list(map(g_equations.equ_to_dict,equations_strs)))
 
+roots_of_dicts = numpy_from_dicts
+solve_equs     = numpy_from_equs
+
 def matrixs_from_equs(equations_strs: list) -> list:
     return matrixs_from_dicts(list(map(g_equations.equ_to_dict,equations_strs)))
 
