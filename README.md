@@ -1,6 +1,6 @@
-# EquationsLib
+# g_equations
 
-EquationsLib is my Python module for working with equations (some things are powered by NumPy)
+g_equations is my Python module for working with equations (some things are powered by NumPy)
 
 > _Special thanks to Nastya for her helpful support ^^_
 

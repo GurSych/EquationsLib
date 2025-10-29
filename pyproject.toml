@@ -1,0 +1,22 @@
+[project]
+name    = "g_equations"
+version = "1.0.0"
+authors = [
+  { name="Gur-Sych", email="dany.gurchin@gmail.com" },
+]
+description = "A little package for working with equations"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "numpy"
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license       = "MIT"
+license-files = ["LICEN[CS]E*"]
+
+[project.urls]
+Homepage = "https://github.com/GurSych/g_equations"
+Issues   = "https://github.com/GurSych/g_equations/issues"
