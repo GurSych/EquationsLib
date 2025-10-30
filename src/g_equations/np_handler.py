@@ -1,11 +1,20 @@
-import numpy
-import typing
-import g_equations
+from typing import TypedDict, List, Dict, Tuple
 
-class matrix_add_values_kwargs(typing.TypedDict,total=False):
+_numpy_available = False
+try:
+    import numpy
+    _numpy_available = True
+except ImportError:
+    pass
+
+class matrix_add_values_kwargs(TypedDict,total=False):
     add_values: bool
 
-def numpy_from_dicts(equations_dicts: list, **kwargs: matrix_add_values_kwargs) -> dict:
+def numpy_from_dicts(equations_dicts: List[Dict[str,float]], **kwargs: matrix_add_values_kwargs) -> Dict[str,float]:
+    if not _numpy_available:
+        raise ImportError("g_equations: numpy is not installed. It is required for numpy_from_dicts")
+    if not equations_dicts:
+        return dict()
     matrix_triple = matrixs_from_dicts(equations_dicts,**kwargs)
     vars          = matrix_triple[2]
     A_matrix      = numpy.matrix(matrix_triple[0])
@@ -17,19 +26,24 @@ def numpy_from_dicts(equations_dicts: list, **kwargs: matrix_add_values_kwargs) 
         var_dict[vars[i]] = float(ans_matrix[i,0])
     return var_dict
 
-def matrixs_from_dicts(equations_dicts: list, **kwargs: matrix_add_values_kwargs) -> tuple:
+def matrixs_from_dicts(equations_dicts: List[Dict[str,float]], **kwargs: matrix_add_values_kwargs) -> Tuple[List[List[float]],List[List[float]],Tuple[str]]:
     allowed_kwargs = {"add_values"}
     for key in kwargs:
         if key not in allowed_kwargs:
             raise Exception("g_equations: Invalid kw-argument: {}".format(key))
     add_values = kwargs.get("add_values",False)
+    if not equations_dicts:
+        return ([],[],())
     if add_values:
         keys = set()
         for dict in equations_dicts:
             for key in dict:
                 if key not in keys: keys.add(key)
         keys = sorted(keys)
-        keys.remove("res")
+        try:
+            keys.remove("res")
+        except ValueError:
+            pass
     else:
         if not all(equations_dicts[i-1].keys() == equations_dicts[i].keys() for i in range(1,len(equations_dicts))):
             raise Exception("g_equations: Equations must have the same variables")
@@ -39,24 +53,27 @@ def matrixs_from_dicts(equations_dicts: list, **kwargs: matrix_add_values_kwargs
         raise Exception("g_equations: Number of equations must be equal to number of variables")
     if add_values:
         A_matrix = [list(map(lambda key: e_d[key] if key in e_d.keys() else 0.0, keys)) for e_d in equations_dicts]
+        B_matrix = [[e_d["res"]] if "res" in e_d.keys() else [0.0] for e_d in equations_dicts]
     else:
         A_matrix = [list(map(lambda key: e_d[key],keys)) for e_d in equations_dicts]
-    try:
-        B_matrix = [[e_d["res"]] for e_d in equations_dicts]
-    except KeyError:
-        raise Exception("g_equations: dictionary must have value by 'res' key")
+        try:
+            B_matrix = [[e_d["res"]] for e_d in equations_dicts]
+        except KeyError:
+            raise Exception("g_equations: dictionary must have value by 'res' key")
     return (A_matrix, B_matrix, tuple(keys))
 
-def numpy_from_equs(equations_strs: list, **kwargs: matrix_add_values_kwargs) -> dict:
-    return numpy_from_dicts(list(map(g_equations.equ_to_dict,equations_strs)),**kwargs)
+def numpy_from_equs(equations_strs: List[str], **kwargs: matrix_add_values_kwargs) -> Dict[str,float]:
+    from .equs import equ_to_dict as _equ_to_dict
+    return numpy_from_dicts(list(map(_equ_to_dict,equations_strs)),**kwargs)
 
 roots_of_dicts = numpy_from_dicts
 solve_equs     = numpy_from_equs
 
-def matrixs_from_equs(equations_strs: list, **kwargs: matrix_add_values_kwargs) -> list:
-    return matrixs_from_dicts(list(map(g_equations.equ_to_dict,equations_strs)),**kwargs)
+def matrixs_from_equs(equations_strs: List[Dict[str,float]], **kwargs: matrix_add_values_kwargs) -> Tuple[List[List[float]],List[List[float]],Tuple[str]]:
+    from .equs import equ_to_dict as _equ_to_dict
+    return matrixs_from_dicts(list(map(_equ_to_dict,equations_strs)),**kwargs)
 
-def matrix_to_str(matrix: list) -> str:
+def matrix_to_str(matrix: List[List[float]]) -> str:
     sttr = ""
     for line in matrix:
         line_str = ""

@@ -1,20 +1,25 @@
 [project]
-name    = "g_equations"
-version = "1.1.2"
-authors = [
-  { name="Gur-Sych", email="dany.gurchin@gmail.com" },
-]
-description = "A little package for working with equations"
+name         = "g_equations"
+description  = "A little package for working with equations"
+version      = "1.1.3"
+author       = "Gur-Sych"
+author-email = "dany.gurchin@gmail.com"
+
+keywords = ["linear","equations","solver"]
+
 readme = "README.md"
 requires-python = ">=3.9"
 dependencies = ["numpy"]
 classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
+    "Development Status :: 4 - Beta",
 ]
+
 license       = "MIT"
 license-files = ["LICEN[CS]E*"]
 
 [project.urls]
-Homepage = "https://github.com/GurSych/g_equations"
-Issues   = "https://github.com/GurSych/g_equations/issues"
+Homepage   = "https://github.com/GurSych/g_equations"
+Repository = "https://github.com/GurSych/g_equations"
+Issues     = "https://github.com/GurSych/g_equations/issues"

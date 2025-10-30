@@ -1,6 +1,6 @@
 # g_equations
 
-g_equations is my Python module for working with equations (some things are powered by NumPy)
+g_equations is my Python package for working with equations (some things are powered by NumPy)
 
 > _Special thanks to Nastya for her helpful support ^^_
 
@@ -16,6 +16,9 @@ import g_equations.np_handler
 ```
 
 **Package Requirements:** Some functions from g_equations.np_handler module require NumPy
+
+> [!TIP]
+> You can easily acces g_equations.np_handler without importing via `g_equation.np`
 
 ## Linear equation to dictionary
 
@@ -34,7 +37,7 @@ All variables are moved to the left side and free terms are moved to the right o
 > [!WARNING]
 > The function works only with variables whose names consist of a single Latin alphabet character
 
-## Linear equation to matrixs
+## Linear equation to matrices
 
 g_equations.np_handler has matrixs_from_dicts(_dictionaries_) function that gets a list of dictionaties (like in [&#39;the section upper&#39;](#linear-equation-to-dictionary)) with variablies' coefficients from a system of equations and returnes tuple with three entries: matrix of variablies' coefficients, matrix with right side values and tuple with order of variablies' names
 
@@ -71,7 +74,7 @@ Both `matrix_pair` look like:
 ```
 matrix_pair[0]: [ [3.0,-1.0, 2.0],        matrix_pair[1]: [ [-4.0],        matrix_pair[2]: ('x','y','z')
                   [1.0, 4.0,-1.0],                          [10.0], 
-                  [2.0, 3.0, 1.0] ]                         [ 8.0] ]      
+                  [2.0, 3.0, 1.0] ]                         [ 8.0] ]
 ```
 
 Both functions have optional key-word argument `add_values: bool` (standart value is False). When it is True, function will place 0.0 value if dictionary/equality does not have coefficients for some variables to avoid 'Equations must have the same variables' exception
@@ -110,7 +113,18 @@ Both `system_roots` look like:
 {'x': 0.16666666666666607, 'y': 2.166666666666668, 'z': -1.166666666666666}
 ```
 
-Both functions have optional key-word argument `add_values: bool` (standart value is False). It is used for internal [&#39;matrixs_from_dicts&#39;](#linear-equation-to-matrixs) calling to avoid its 'Equations must have the same variables' exception
+Both functions have optional key-word argument `add_values: bool` (standart value is False). It is used for internal [&#39;matrixs_from_dicts&#39;](#linear-equation-to-matrices) calling to avoid its 'Equations must have the same variables' exception
 
 > [!NOTE]
 > There are shorter names for these two functions. `roots_of_dicts` for numpy_from_dicts and `solve_equs` for numpy_from_equs
+
+## Matrices and dictionaries to str
+
+There're g_equations.dict_to_str(_dictionary_) to get a string with linear equation and g_equations.np_handler.matrix_to_str(_matrix_) to get a NumPy-like string with matrix
+
+```py
+equ_str = g_equations.dict_to_str({'res': 8.0, 'x': 1.0, 'y': 72.3, 'z': -3.0})
+print(equ_str) # x + 72.3y - 3.0z = 8.0
+matrix_str = g_equations.np_handler.matrix_to_str([ [1.0, 2.0], [3.0, 4.0] ])
+print(matrix_str) # 1.0 2.0; 3.0 4.0
+```
