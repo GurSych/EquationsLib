@@ -18,11 +18,15 @@ def numpy_from_dicts(equations_dicts: list, **kwargs: matrix_add_values_kwargs) 
     return var_dict
 
 def matrixs_from_dicts(equations_dicts: list, **kwargs: matrix_add_values_kwargs) -> tuple:
+    allowed_kwargs = {"add_values"}
+    for key in kwargs:
+        if key not in allowed_kwargs:
+            raise Exception("g_equations: Invalid kw-argument: {}".format(key))
     add_values = kwargs.get("add_values",False)
     if add_values:
         keys = set()
         for dict in equations_dicts:
-            for key in dict.keys():
+            for key in dict:
                 if key not in keys: keys.add(key)
         keys = sorted(keys)
         keys.remove("res")

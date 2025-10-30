@@ -1,15 +1,13 @@
 [project]
 name    = "g_equations"
-version = "1.1.0"
+version = "1.1.1"
 authors = [
   { name="Gur-Sych", email="dany.gurchin@gmail.com" },
 ]
 description = "A little package for working with equations"
 readme = "README.md"
 requires-python = ">=3.9"
-dependencies = [
-    "numpy"
-]
+dependencies = ["numpy"]
 classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",
