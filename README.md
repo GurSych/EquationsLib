@@ -36,7 +36,7 @@ Returned dictionary will have right side value by `"res"` key and variablies' co
 
 ## Linear equation to matrixs
 
-g_equations.np_handler has matrixs_from_dicts(_dictionaries_) function that gets a list of dictionaties (like in [&#39;the section upper&#39;](#linear-equation-to-dictionary)) with variablies' coefficients from a system of equations and returnes list with two entries: matrix of variablies' coefficients and matrix with right side values
+g_equations.np_handler has matrixs_from_dicts(_dictionaries_) function that gets a list of dictionaties (like in [&#39;the section upper&#39;](#linear-equation-to-dictionary)) with variablies' coefficients from a system of equations and returnes tuple with three entries: matrix of variablies' coefficients, matrix with right side values and tuple with order of variablies' names
 
 > [!NOTE]
 > Matrix (not a numpy.matrix) is a list of lists with a rectangular shape<br>
@@ -69,10 +69,12 @@ matrix_pair = g_equations.np_handler.matrixs_from_equs([
 Both `matrix_pair` look like:
 
 ```
-matrix_pair[0]: [ [3.0,-1.0, 2.0],        matrix_pair[1]: [ [-4.0],
-                  [1.0, 4.0,-1.0],                          [10.0],
+matrix_pair[0]: [ [3.0,-1.0, 2.0],        matrix_pair[1]: [ [-4.0],        matrix_pair[2]: ('x','y','z')
+                  [1.0, 4.0,-1.0],                          [10.0], 
                   [2.0, 3.0, 1.0] ]                         [ 8.0] ]      
 ```
+
+Both functions have optional key-word argument `add_values: bool` (standart value is False). When it is True, function will place 0.0 value if dictionary/equality does not have coefficients for some variables to avoid 'Equations must have the same variables' exception
 
 ## Solve system of linear equations
 
@@ -107,6 +109,8 @@ Both `system_roots` look like:
 ```
 {'x': 0.16666666666666607, 'y': 2.166666666666668, 'z': -1.166666666666666}
 ```
+
+Both functions have optional key-word argument `add_values: bool` (standart value is False). It is used for internal [&#39;matrixs_from_dicts&#39;](#linear-equation-to-matrixs) calling to avoid its 'Equations must have the same variables' exception
 
 > [!NOTE]
 > There are shorter names for these two functions. `roots_of_dicts` for numpy_from_dicts and `solve_equs` for numpy_from_equs

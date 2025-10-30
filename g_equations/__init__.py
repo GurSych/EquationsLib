@@ -15,7 +15,7 @@ def equ_to_dict(equation_str: str) -> dict:
             if i == var_indx: continue
             var_str     = equation_str[var_indx:i]
             var_str_len = i - var_indx
-            if var_str_len == 0:
+            if var_str_len == 1 and var_indx != 0:
                 raise Exception("g_equations: Loosing statement between math symbols")
             var_name = var_str[-1]
             if var_name.isalpha():
@@ -27,11 +27,11 @@ def equ_to_dict(equation_str: str) -> dict:
                 var_value_len = var_str_len
                 var_name      = "res"
                 local_k       = -k
-            if var_value_len == 0:
+            if var_value_len == 0 and var_indx == 0:
                 var_value = 1.0
             elif var_value_len == 1 and var_indx != 0:
-                if var_indx == '+': var_value =  1.0
-                else:               var_value = -1.0
+                if var_value[0] == '+': var_value =  1.0
+                else:                   var_value = -1.0
             else:
                 try:
                     var_value = float(var_value)
