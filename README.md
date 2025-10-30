@@ -4,6 +4,14 @@ g_equations is my Python package for working with equations (some things are pow
 
 > _Special thanks to Nastya for her helpful support ^^_
 
+# Installing Library
+
+You can install the package via pip
+
+```bash
+pip install g_equations
+```
+
 # Using Library
 
 > The library is in development so this section is updated together with library itself
