@@ -28,8 +28,8 @@ equ_dict = g_equations.equ_to_dict("x + 72.3y - 3z - 6 = 8.0 - x")
 print(equ_dict) # {'res': 14.0, 'x': 2.0, 'y': 72.3, 'z': -3.0}
 ```
 
-String should have two parts with `=` between them. All variables are moved to the left side and free terms are moved to the right one<br>
-Returned dictionary will have right side value by `"res"` key and variablies' coefficients by their names
+String should have two parts with `=` between them.<br>
+All variables are moved to the left side and free terms are moved to the right one. Returned dictionary will have right side value by `"res"` key and variablies' coefficients by their names
 
 > [!WARNING]
 > The function works only with variables whose names consist of a single Latin alphabet character
