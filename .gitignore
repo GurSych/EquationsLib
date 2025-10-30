@@ -4,6 +4,9 @@
 ### Py cache ###
 src/g_equations/__pycache__/
 
+### Venv ###
+.venv/
+
 ### Test .py ###
 ./*.py
 
