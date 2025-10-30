@@ -41,7 +41,10 @@ def matrixs_from_dicts(equations_dicts: list, **kwargs: matrix_add_values_kwargs
         A_matrix = [list(map(lambda key: e_d[key] if key in e_d.keys() else 0.0, keys)) for e_d in equations_dicts]
     else:
         A_matrix = [list(map(lambda key: e_d[key],keys)) for e_d in equations_dicts]
-    B_matrix = [[e_d["res"]] for e_d in equations_dicts]
+    try:
+        B_matrix = [[e_d["res"]] for e_d in equations_dicts]
+    except KeyError:
+        raise Exception("g_equations: dictionary must have value by 'res' key")
     return (A_matrix, B_matrix, tuple(keys))
 
 def numpy_from_equs(equations_strs: list, **kwargs: matrix_add_values_kwargs) -> dict:
