@@ -7,6 +7,10 @@ src/g_equations/__pycache__/
 ### Venv ###
 .venv/
 
+### PyPi ###
+dist/
+src/g_equations.egg-info
+
 ### Test .py ###
 ./*.py
 
